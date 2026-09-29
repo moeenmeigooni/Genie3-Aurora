@@ -5,6 +5,7 @@ wandb
 lightning
 pytorch-lightning
 lightning-utilities
+torchmetrics
 biopython<1.86
 tensorboard
 ml-collections
