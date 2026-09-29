@@ -1,7 +1,8 @@
 # Genie3 on Aurora XPU
 
-This is the Aurora port of the AlQurayshi Lab's Genie3 repository. It keeps
-the ALCF `frameworks/2025.3.1` PyTorch distribution, which provides native
+This is the Aurora port of the AlQurayshi Lab's Genie3 repository. It uses
+the ALCF default `frameworks` module (currently `frameworks/2026.1.0` on
+Aurora), which provides native
 `torch.xpu` and the `xccl` distributed backend. No CUDA PyTorch wheel or
 Intel Extension for PyTorch is installed.
 

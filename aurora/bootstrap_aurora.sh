@@ -50,12 +50,13 @@ if ! command -v module >/dev/null 2>&1; then
     exit 1
 fi
 set +u
-module load frameworks/2025.3.1
+frameworks_module="${AURORA_FRAMEWORKS_MODULE:-frameworks}"
+module load "${frameworks_module}"
 set -u
 
 python_candidate="$(command -v python3 || command -v python)"
 "${python_candidate}" -c 'import sys; raise SystemExit(sys.version_info[:2] != (3, 12))' || {
-    echo "frameworks/2025.3.1 must provide Python 3.12." >&2
+    echo "${frameworks_module} must provide Python 3.12." >&2
     exit 1
 }
 
