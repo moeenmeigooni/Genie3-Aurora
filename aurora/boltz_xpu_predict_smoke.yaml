@@ -1,0 +1,7 @@
+# Modified for Aurora XPU compatibility by the FRAME-IDP Aurora port; see aurora/README.md.
+version: 1
+sequences:
+  - protein:
+      id: A
+      sequence: MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQ
+      msa: empty

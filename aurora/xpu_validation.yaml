@@ -1,0 +1,20 @@
+# Modified for Aurora XPU compatibility by the FRAME-IDP Aurora port; see aurora/README.md.
+experiment:
+  name: aurora_xpu_validation
+
+paths:
+  rootdir: ./runs/genie3-aurora-validation
+
+generation:
+  dataset:
+    source: unconditional
+    min_length: 50
+    max_length: 50
+    length_step: 50
+    n_sample: 1
+  sampler:
+    sampler:
+      direction_scale: 0.8
+
+# Use `aurora/genie3_evaluate.pbs` after generation to run the full
+# ProteinMPNN → ESMFold → reduction validation on the resulting backbone.

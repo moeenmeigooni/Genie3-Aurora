@@ -1,0 +1,31 @@
+#!/bin/bash -l
+# Modified for Aurora XPU compatibility by the FRAME-IDP Aurora port; see aurora/README.md.
+# Run a minimal real Boltz2 prediction on one Aurora XPU tile.
+# Submit: qsub -A FRAME-IDP -q debug boltz_xpu_predict_smoke.pbs
+#PBS -N genie3-boltz-predict-xpu
+#PBS -l select=1
+#PBS -l place=scatter
+#PBS -l walltime=1:00:00
+#PBS -l filesystems=home:flare
+
+set -euo pipefail
+
+repo="${GENIE3_REPO:-${PBS_O_WORKDIR:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)}}"
+source "${repo}/aurora/activate_genie3_aurora.sh"
+
+workdir=$(mktemp -d "${TMPDIR}/boltz-xpu-predict-smoke.XXXXXX")
+cp "${repo}/aurora/boltz_xpu_predict_smoke.yaml" "${workdir}/input.yaml"
+
+"${GENIE3_BOLTZ_BIN}" predict "${workdir}/input.yaml" \
+  --out_dir "${workdir}/output" \
+  --cache "${GENIE3_BOLTZ_CACHE}" \
+  --accelerator xpu \
+  --recycling_steps 1 \
+  --sampling_steps 2 \
+  --diffusion_samples 1 \
+  --max_parallel_samples 1 \
+  --no_kernels \
+  --output_format pdb
+
+test -n "$(find "${workdir}/output/predictions" -type f -name "*.pdb" -print -quit)"
+echo "Boltz2 XPU prediction smoke passed."

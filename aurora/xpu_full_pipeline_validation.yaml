@@ -1,0 +1,27 @@
+# Modified for Aurora XPU compatibility by the FRAME-IDP Aurora port; see aurora/README.md.
+experiment:
+  # Must match aurora/xpu_validation.yaml so evaluation discovers generation output.
+  name: aurora_xpu_validation
+
+paths:
+  rootdir: ./runs/genie3-aurora-validation
+
+runtime:
+  num_devices: 1
+
+evaluation:
+  version: unconditional
+  verbose: true
+  inverse_folding:
+    model_name: proteinmpnn
+    mode: all
+    num_seq: 1
+  folding:
+    model_name: esmfold
+    mode: single
+    backend: subprocess
+    num_models: 1
+    num_recycles: 1
+  reduction:
+    calc_novelty: false
+    skip_reduce: false

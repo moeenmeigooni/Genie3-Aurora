@@ -1,0 +1,15 @@
+#!/bin/bash -l
+# Modified for Aurora XPU compatibility by the FRAME-IDP Aurora port; see aurora/README.md.
+# Submit: qsub -A FRAME-IDP -q debug esmfold_xpu_smoke.pbs
+#PBS -N genie3-esmfold-xpu
+#PBS -l select=1
+#PBS -l place=scatter
+#PBS -l walltime=0:15:00
+#PBS -l filesystems=home:flare
+
+set -euo pipefail
+
+repo="${GENIE3_REPO:-${PBS_O_WORKDIR:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)}}"
+source "${repo}/aurora/activate_genie3_aurora.sh"
+cd "${repo}"
+python -u aurora/esmfold_xpu_smoke.py
