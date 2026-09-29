@@ -6,6 +6,25 @@ This repository includes the Aurora Intel XPU port. Follow
 [`aurora/README.md`](aurora/README.md) for its installation and end-to-end run
 instructions. Aurora-specific modifications are marked in the changed files.
 
+## Quick installation on Aurora
+
+Run these commands on an Aurora login node. Keep the checkout and environment
+on shared project storage; change `FRAME-IDP` if your allocation uses another
+project directory. `--weights` downloads the Genie3 generation checkpoint.
+
+```bash
+export AURORA_PROJECT_ROOT="/lus/flare/projects/FRAME-IDP/${USER}"
+mkdir -p "$AURORA_PROJECT_ROOT"
+cd "$AURORA_PROJECT_ROOT"
+git clone https://github.com/moeenmeigooni/Genie3-Aurora.git
+cd Genie3-Aurora
+bash aurora/bootstrap_aurora.sh --weights
+```
+
+This installs native XPU generation and the bundled evaluation tools.
+For smoke jobs, validation steps, and optional ColabFold or Boltz environments,
+see [Aurora setup and run instructions](aurora/README.md).
+
 Genie 3 is a fast, all-atom SE(3)-equivariant diffusion model for protein design.
 It achieves state-of-the-art performance on unconditional generation, motif
 scaffolding, and binder design while retaining the computational efficiency of
