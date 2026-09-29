@@ -18,7 +18,7 @@ mkdir -p "$AURORA_PROJECT_ROOT"
 cd "$AURORA_PROJECT_ROOT"
 git clone https://github.com/moeenmeigooni/Genie3-Aurora.git
 cd Genie3-Aurora
-bash aurora/bootstrap_aurora.sh --weights
+bash aurora/install_aurora.sh --weights
 ```
 
 This installs native XPU generation and the bundled evaluation tools.

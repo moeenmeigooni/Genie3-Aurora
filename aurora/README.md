@@ -19,7 +19,7 @@ when `pretrained/` is already available in the checkout or is linked from a
 shared project cache:
 
 ```bash
-bash aurora/bootstrap_aurora.sh --weights
+bash aurora/install_aurora.sh --weights
 ```
 
 For a test or alternate installation path, set the environment and cache roots
@@ -28,7 +28,7 @@ before running the installer:
 ```bash
 GENIE3_AURORA_ENV=/path/to/test/envs/genie3 \
 GENIE3_CACHE_ROOT=/path/to/project/cache/genie3 \
-bash aurora/bootstrap_aurora.sh
+bash aurora/install_aurora.sh
 ```
 
 Set `AURORA_PROJECT_ROOT` to a shared project directory visible from both the

@@ -14,7 +14,7 @@ setup_boltz=false
 
 usage() {
     cat <<'EOF'
-Usage: aurora/bootstrap_aurora.sh [options]
+Usage: aurora/install_aurora.sh [options]
 
 Creates a Python 3.12 venv over Aurora's frameworks module and installs Genie3
 without resolving or replacing the vendor-provided XPU PyTorch. Model weights
