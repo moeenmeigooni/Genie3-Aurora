@@ -1,5 +1,12 @@
 # Genie3 on Aurora XPU
 
+Clone the Aurora port and enter its checkout:
+
+```bash
+git clone https://github.com/moeenmeigooni/Genie3-Aurora.git
+cd Genie3-Aurora
+```
+
 This is the Aurora port of the AlQurayshi Lab's Genie3 repository. It uses
 the ALCF default `frameworks` module (currently `frameworks/2026.1.0` on
 Aurora), which provides native
