@@ -63,6 +63,10 @@ isolated XPU-aware Lightning runtime with CUDA-only custom kernels disabled;
 this preserves the standard Boltz2 prediction outputs while using portable
 PyTorch operators.
 
+Evaluation workers use Python's `spawn` multiprocessing context on XPU. This
+avoids PyTorch's restriction against initializing XPU from a forked child and
+keeps the normal per-device parallel mapping workflow.
+
 The main installer also fetches ProteinMPNN and IPSAE and builds the TM-align,
 TMscore, and DSSP helpers used by evaluation. Those tools live under the
 checkout's ignored `packages/` directory. The default installer does not run

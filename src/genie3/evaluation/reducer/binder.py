@@ -27,6 +27,7 @@ from genie3.evaluation.utils.interface import check_binding_interface
 from genie3.evaluation.utils.metric import compute_multimer_ca_rmsd, compute_ipsae
 from genie3.evaluation.utils.parse import parse_fasta, parse_problem_name_from_fasta
 from genie3.evaluation.utils.secondary import assign_secondary_structure
+from genie3.runtime.device import accelerator_name
 
 
 _BINDER_WORKER_CONTEXT = None
@@ -336,7 +337,12 @@ class BinderReducer(Reducer):
             for design_filepath in iterator:
                 worker_items.append(_compile_binder_design(design_filepath))
         else:
-            with Pool(
+            pool_factory = (
+                multiprocessing.get_context('spawn').Pool
+                if accelerator_name() == 'xpu'
+                else Pool
+            )
+            with pool_factory(
                 processes=n_worker,
                 initializer=_init_binder_worker,
                 initargs=(
