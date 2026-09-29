@@ -1,0 +1,10 @@
+# Added for the Aurora XPU port; see aurora/README.md.
+# The frameworks module supplies XPU PyTorch and core numerical libraries;
+# install these runtime packages without resolving over the vendor PyTorch.
+wandb
+lightning
+pytorch-lightning
+biopython<1.86
+tensorboard
+ml-collections
+zstandard

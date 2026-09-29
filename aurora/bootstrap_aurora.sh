@@ -75,6 +75,8 @@ source "${script_dir}/activate_genie3_aurora.sh"
 
 python_bin="${env_prefix}/bin/python"
 "${python_bin}" -m pip install --disable-pip-version-check --no-deps \
+    -r "${script_dir}/requirements-aurora.txt"
+"${python_bin}" -m pip install --disable-pip-version-check --no-deps \
     --no-build-isolation --editable "${repo_dir}"
 
 bash "${script_dir}/install_tools_aurora.sh"
@@ -93,6 +95,7 @@ modules = {
     "wandb": "wandb",
     "pandas": "pandas",
     "lightning": "lightning",
+    "pytorch_lightning": "pytorch-lightning",
     "Bio": "biopython",
     "tensorboard": "tensorboard",
     "ml_collections": "ml-collections",
@@ -103,6 +106,12 @@ modules = {
 missing = [name for name in modules if importlib.util.find_spec(name) is None]
 if missing:
     raise SystemExit("Missing Aurora framework dependencies: " + ", ".join(missing))
+
+import lightning.pytorch
+import pytorch_lightning
+import tensorboard
+import wandb
+import zstandard
 
 import torch
 if not hasattr(torch, "xpu"):
